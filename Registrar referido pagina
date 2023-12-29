@@ -1,0 +1,45 @@
+function defaul(){
+  for (i=0;i<20;i++){
+    Registrar_referido('#','6-11-2023','Abc2','javier Vargas','3008616994','dirección','barrio','otrobarrio','Ocupación','Observación','cédula cliente')
+  }
+}
+
+function Registrar_referido(informacion = new Array()) {
+  var hoja_registro = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Data")
+  if(hoja_registro==null){
+    var hoja_registro = SpreadsheetApp.getActiveSpreadsheet().insertSheet()
+    hoja_registro.setName("Data")
+    var encabezados = new Array('#','fecha registro','codigo referido','Nombre completo','Celular','dirección','barrio','barrios nuevos','Ocupación','Observación','cédula cliente')
+    i=0
+    encabezados.forEach(function(title){
+      hoja_registro.getRange(1,1+i).setValue(title).setFontWeight("bold").setFontFamily("Roboto Condensed").setHorizontalAlignment("center").setVerticalAlignment("middle").setBorder(true, true, true, true, true, true)
+      i=i+1
+    })
+  }else{
+    var encabezados_tabla = new Array()
+    var posiciones = new Array()
+    var datosregistrados = hoja_registro.getDataRange().getValues()
+    var registros = Number()
+    datosregistrados.forEach(function(datos){
+      if(datos[0]=='#'){
+        encabezados_tabla=datos /*'#','fecha registro','codigo referido','Nombre completo','Celular','dirección','barrio','Ocupación','Observación','cédula cliente')*/
+        var a = 0 
+        encabezados_tabla.forEach(function(elemento){
+          posiciones.push(a)
+          a = a+1
+        })
+      }
+      registros=registros+1
+    })
+    var pos_nuevoregistro = datosregistrados.length+1
+    var e = 0
+    encabezados_tabla.forEach(function(dato){
+      if(e==0){
+        hoja_registro.getRange(pos_nuevoregistro,posiciones[e]+1).setValue(registros).setFontFamily("Roboto Condensed").setHorizontalAlignment("center").setVerticalAlignment("middle")
+      }else{
+        hoja_registro.getRange(pos_nuevoregistro,posiciones[e]+1).setValue(informacion[e]).setFontFamily("Roboto Condensed").setHorizontalAlignment("center").setVerticalAlignment("middle")
+      }
+      e=e+1
+    })
+  }
+}
