@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://apis.google.com/js/api.js"></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap");
+
+    body {
+      background: #584273;
+      padding: 100px 0;
+      width: 100%;
+      height: 100%;
+      font-size: 18px;
+      line-height: 1.5;
+      font-family: "Roboto", sans-serif;
+      color: #222;
+    }
+
+    .container {
+      max-width: 1230px;
+      width: 100%;
+    }
+
+    .logoprin {
+      font-size: 5px;
+    }
+
+    h1 {
+      font-weight: 500;
+      font-size: 16px;
+      font-family: "Roboto", sans-serif;
+      color: white;
+    }
+
+    .header {
+      margin-bottom: 30px;
+    }
+
+    #description {
+      font-weight: 500;
+      font-size: 15px;
+      color: white;
+      font-family: "Roboto", sans-serif;
+    }
+
+    .form-wrap {
+      background: rgba(255, 255, 255, 1);
+      width: 100%;
+      max-width: 850px;
+      padding: 20px;
+      margin: 0 auto;
+      position: relative;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+      box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-wrap:before {
+      content: "";
+      width: 90%;
+      height: calc(100% + 60px);
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      position: absolute;
+      top: -30px;
+      background: rgba(159, 119, 232, 0.5);
+      /* Morado claro opaco */
+      z-index: -1;
+      opacity: 0.8;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+      box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .form-group {
+      margin-bottom: 5px;
+    }
+
+    .form-group>label {
+      display: block;
+      font-size: 16px;
+      color: #000;
+    }
+
+    .custom-control-label {
+      color: #000;
+      font-size: 16px;
+    }
+
+    textarea.form-control {
+      height: 100px;
+      padding-top: 15px;
+      resize: none;
+    }
+
+    .btn {
+      padding: 0.657rem 0.75rem;
+      font-size: 18px;
+      letter-spacing: 0.05em;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: #584273;
+      border-color: #584273;
+      font-family: "Roboto", sans-serif;
+      font-size: 12px;
+      width: 30%;
+    }
+
+    .header img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 300px;
+      /* Tamaño personalizado de la imagen */
+    }
+
+    .btn-primary:not(:disabled):not(.disabled):active,
+    .btn-primary:not(:disabled):not(.disabled).active,
+    .show>.btn-primary.dropdown-toggle {
+      color: #00bcd9;
+      background-color: #ffffff;
+      border-color: #00bcd9;
+    }
+
+    .btn-primary:not(:disabled):not(.disabled):active:focus,
+    .btn-primary:not(:disabled):not(.disabled).active:focus,
+    .show>.btn-primary.dropdown-toggle:focus {
+      -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary:focus,
+    .btn-primary.focus {
+      color: #00bcd9;
+      background-color: #ffffff;
+      border-color: #00bcd9;
+      -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary:hover {
+      color: #00bcd9;
+      background-color: #ffffff;
+      border-color: #00bcd9;
+      -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control {
+      height: 50px;
+      background: #ecf0f4;
+      border-color: transparent;
+      padding: 0 15px;
+      font-size: 16px;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .form-control:focus {
+      border-color: #00bcd9;
+      -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-busqc {
+      color: #fff;
+      background: #584273;
+      border-color: #584273;
+      font-family: "Roboto", sans-serif;
+      font-size: 12px;
+    }
+
+    .btn-referir {
+      color: #fff;
+      background: #584273;
+      border-color: #584273;
+      font-family: "Roboto", sans-serif;
+      font-size: 12px;
+    }
+
+
+    #busq_apartado {
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 25px;
+      font-size: 16px;
+    }
+
+    #col-md-12 {
+      align-items: center;
+    }
+
+    .info_cliente {
+      margin-bottom: 50px;
+    }
+
+    .info_cliente>label {
+      display: block;
+      font-size: 15px;
+      color: #000;
+    }
+
+    .campana {
+      margin-bottom: 20px;
+    }
+
+    .campana>label {
+      display: block;
+      font-size: 15px;
+      color: #000;
+    }
+
+    #survey-form {
+      margin-bottom: 20px;
+    }
+
+    #info_cliente {
+      align-items: center;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 25px;
+      font-size: 16px;
+    }
+
+    #enc_tablaclient {
+      color: #fff;
+      background: #584273;
+      border-color: #584273;
+      font-family: "Roboto", sans-serif;
+      border: 1px solid black;
+      font-size: 15px;
+    }
+
+    #tablacliente {
+      border: 1px solid black;
+      font-family: "Roboto", sans-serif;
+      font-size: 15px;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #separacion_tabla {
+      border: 1px solid black;
+    }
+
+    /*nuevo alerta*/
+    #mensaje {
+      margin-left: 2%;
+      margin-right: auto;
+      margin-bottom: 1%;
+    }
+
+    .footer {
+      align-self: auto;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .alert {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 30%;
+      margin-left: 30%;
+      margin-right: auto;
+      font-size: 15px;
+    }
+
+    .oculta {
+      display: none !important;
+    }
+
+    /*nuevo imagen carga*/
+    #pinbusqueda {
+      transform: scale(1.8);
+      /* Aumentar el tamaño en un 60% */
+      align-self: auto;
+    }
+
+    @keyframes rotateAnimation {
+      0% {
+        transform: rotate(360deg);
+      }
+
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+
+    .rotating-icon {
+      animation: rotateAnimation 1s infinite linear;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /*nueva tabla de referidos*/
+
+    #tablareferidos {
+      border: 1px solid black;
+      font-family: "Roboto", sans-serif;
+      font-size: 15px;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      align-items: center;
+      padding-right: initial;
+      padding-left: initial;
+    }
+
+    #enc_tablareferidos {
+      display: inline-flex;
+      justify-content: center;
+      color: #fff;
+      background: #584273;
+      border-color: #584273;
+      font-family: "Roboto", sans-serif;
+      border: 1px solid black;
+      font-size: 15px;
+      height: auto;
+    }
+
+    .btn-outline-success {
+      border-radius: 0px;
+      display: inline-flex;
+      font-size: 18px;
+      justify-content: center;
+      align-items: center;
+      height: 26px;
+      width: 4px;
+    }
+
+    .btn-outline-primary {
+      display: inline-flex;
+      font-size: 18px;
+      justify-content: center;
+      align-items: center;
+      height: 26px;
+      width: 5px;
+    }
+
+    .btn-outline-danger {
+      display: inline-flex;
+      font-size: 18px;
+      justify-content: center;
+      align-items: center;
+      height: 26px;
+      width: 5px;
+    }
+
+    #separacion_tablarefe {
+      border: 1px solid black;
+      align-items: center;
+      font-size: 12px;
+      display: inline-table;
+      justify-content: center;
+    }
+  </style>
+  <base target="_top">
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-rounded/css/uicons-bold-rounded.css'>
+      <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+      <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css'>
+      <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-straight/css/uicons-solid-straight.css'>
+      <img class="logoprin" src="https://amigored.com.co/wp-content/uploads/2016/08/AmigoRed-peque%C3%B1o.png">
+      <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-bold-straight/css/uicons-bold-straight.css'>
+      <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+      <h1 id="title" class="text-center">"AmigoRed te da el poder de conectar, crear y brillar en el universo digital.
+        ¡Prepárate para sorprenderte a ti mismo!"</h1>
+      <p id="description" class="text-center">
+        ¡Tenemos increibles beneficios si promueves y compartes tu experiencia con nuestra marca de internet!
+      </p>
+    </header>
+    <div class="form-wrap">
+      <div class="row" id="busq_apartado">
+        <div class="col-md-3 text-center">
+          <label id="name-label"><i class="fi fi-ss-user"></i></i> <b> USUARIO:</b></label>
+        </div>
+        <div class="col-md-5">
+          <input type="number" name="num_cedula" id="busqueda_titular" placeholder="Ingrese el número de cédula del titular" class="form-control" required>
+        </div>
+        <div class="col-md-2 text-center">
+          <button onclick="buscarcliente()" id="btn buscar-cliente" class="btn btn-busqc"><i class="fi fi-bs-search"></i> Buscar</button>
+        </div>
+        <div id="pinbusqueda" class="col-md-2 text-center" hidden="true">
+          <div id="rotacion"><i class="fi fi-br-loading"></i></div>
+        </div>
+      </div>
+      <div class="row" id="info_cliente" hidden="true">
+        <div class="col-md-12 text-center"></div>
+        <div class="info_cliente">
+          <div id="tablacliente" class="row text-rigth">
+            <div id="enc_tablaclient" class="col-md-12 text-center">
+              Información registrada del cliente
+            </div>
+            <div id="separacion_tabla" class="col-md-3 text-center">
+              <label><b>Nombre completo:</b></label>
+            </div>
+            <div id="separacion_tabla" class="col-md-9">
+              <label id="nombrecliente_var"></label>
+            </div>
+            <div id="separacion_tabla" class="col-md-3 text-center">
+              <label><b>Celular:</b></label>
+            </div>
+            <div id="separacion_tabla" class="col-md-9">
+              <label id="celular_var"></label>
+            </div>
+            <div id="separacion_tabla" class="col-md-3 text-center">
+              <label><b>Barrio:</b></label>
+            </div>
+            <div id="separacion_tabla" class="col-md-9">
+              <label id="barrio_var"></label>
+            </div>
+            <div id="separacion_tabla" class="col-md-3 text-center">
+              <label><b>Dirección:</b></label>
+            </div>
+            <div id="separacion_tabla" class="col-md-9">
+              <label id="direccion_var"></label>
+            </div>
+            <div id="separacion_tabla" class="col-md-3 text-center">
+              <label><b>Deuda:</b></label>
+            </div>
+            <div id="separacion_tabla" class="col-md-9">
+              <label id="deuda_var"></label>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="campana">
+              <p></p>
+              <label>Señor/a <b id="msg_campana">{{nombrecompleto}}</b>, ¡tenemos una oferta imperdible para usted!<label>
+								<label><br>Estamos lanzando una emocionante campaña en la que planeamos recompensar su confianza y apoyo :<b>"Por cada cliente que usted refiera y que instale nuestro servicio de Internet, recibirá un generoso bono del 5% como agradecimiento.</b></br><br>Usted puede disfrutar de este beneficio cumpliendo con las siguientes condiciones:</br>
+									<b>(1)</b> Refiera a sus amigos, familiares o conocidos a nuestro servicio de Internet.
+									<br><b>(2)</b> Asegúrese de que el cliente que refirió realizó la instalación exitosa de nuestro servicio.</br>
+									<b>(3)</b> Una vez que el nuevo cliente esté disfrutando de nuestra conexión de alta velocidad, usted recibirá un bono del 5% del costo de su servicio en su proxima factura.<br></br>
+									<br>¡Así de sencillo! No solo podrá ayudar a sus seres queridos a obtener una conexión a Internet confiable, rápida y segura, sino que también será recompensado por ello. Puede refierir un máximo de 20 usuarios, <b>¡Recuerde solo se aplica el beneficio si se instala el servicio de internet a la persona que usted refirio!</b>. ¡De click en referir para agregar a sus referedos! ¡Una vez termine de click en Guardar!</br>
+								</label>
+            </div>
+          </div>
+          <div id="busq_apartado" class="col-md-12 text-center">
+            <button onclick="tomadatos_referidos()" id="btn referir" class="btn btn-referir"><i class="fi fi-ss-user-add"></i></i> REFERIR</button>
+          </div>
+          <div class="row" id="registro_datos_referido">
+            <form id="survey-form" hidden="true">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label id="nombrecompleto_txt"><i class="fi fi-ss-user"></i> Nombre Completo</label>
+                    <input type="text" name="name" id="referido_nombrecompleto" placeholder="Ingrese su nombre completo" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label id="numcelular_txt"><i class="fi fi-sr-circle-phone"></i> Número de Celular</label>
+                    <input type="number" name="age" id="referido_celular" class="form-control" placeholder="Ingrese su número de celular" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label id="direccion_txt"><i class="fi fi-ss-marker"></i> Dirección</label>
+                    <input type="text" name="direccion" id="referido_direccion" class="form-control" placeholder="Ingrese su dirección" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label id="email-label"><i class="fi fi-ss-house-building"></i> Conjunto Residendial</label>
+                    <select id="referido_conjunto" name="role" class="form-control" required>
+							<option disabled selected value>Seleccione</option>
+							<option value="Nando Marín - La creciente">Nando Marín - La creciente</option>
+							<option value="Nando Marín - Las Muchachitas">Nando Marín - Las Muchachitas</option>
+							<option value="Nando Marín - La primera Piedra">Nando Marín - La primera Piedra</option>
+							<option value="no valido">N/A</option>
+							<option value="Otro">Otro</option>
+						</select>
+                  </div>
+                </div>
+                <div id="otrobarrio" class="col-md-6" hidden="true">
+                  <div class="form-group">
+                    <label><i class="fi fi-ss-house-building"></i> Conjunto Residencial</label>
+                    <input type="text" name="barrio_nuevo" id="referido_otrobarrio" class="form-control" placeholder="Ingrese el nombre del barrio">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label><i class="fi fi-ss-briefcase-blank"></i> Ocupación <small>(optional)</small></label>
+                    <select id="referido_ocupacion" name="role" class="form-control" required>
+							<option disabled selected value>Seleccione</option>
+							<option value="Estudiante">Estudiante</option>
+							<option value="Trabajador de tiempo completo">Trabajador de tiempo completo</option>
+							<option value="Trabajador de tiempo parcial">Trabajador de tiempo parcial</option>
+							<option value="Prefiere no decir">Prefiere no decir</option>
+							<option value="Otro">Otro</option>
+						</select>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label><i class="fi fi-br-poll-h"></i> Observación</label>
+                    <textarea id="comments" class="form-control" name="comment" placeholder="Agrege un comentario aquí..."></textarea>
+                  </div>
+                </div>
+                <div class="col-md-6 text-center">
+                  <button onclick="insert_list_referidos()" class="btn btn-referir"><i class="fi fi-ss-paper-plane"></i> REGISTRAR</button>
+                </div>
+                <div class="col-md-6 text-center">
+                  <button type="submit" id="submit" class="btn btn-primary"><i class="fi fi-rs-floppy-disk-circle-arrow-right"></i> GUARDAR</button>
+                </div>
+            </form>
+          </div>
+          <div id="tablareferidos" class="row text-rigth">
+            <div id="enc_tablareferidos" class="col-md-12 text-center">
+              Listado de referidos
+            </div>
+            <div id="separacion_tablarefe" class="col-md-1 text-center">
+              <label><b>#</b></label>
+            </div>
+            <div id="separacion_tablarefe" class="col-md-4 text-center">
+              <label><b>Nombre completo</b></label>
+            </div>
+            <div id="separacion_tablarefe" class="col-md-3 text-center">
+              <label><b>Celular</b></label>
+            </div>
+            <div id="separacion_tablarefe" class="col-md-2 text-center">
+              <label><b>Barrio</b></label>
+            </div>
+            <div id="separacion_tablarefe" class="col-md-2 text-center">
+              <label><b>Opciones</b></label>
+              <labe> </label><i class="fi fi-rr-menu-burger"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  <footer class="footer">
+    <div class="alert alert-warning d-flex align-items-center oculta" role="alert" id="mialerta">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+        class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+        <path
+          d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+      </svg>
+      <div id="mensaje">
+        {{mensaje}}
+      </div>
+    </div>
+  </footer>
+  <script>
+    function mostrar_elemento(id_object) {
+      var element = document.getElementById(id_object);
+      if (element.hidden == true) {
+        element.removeAttribute("hidden");
+      }
+    }
+    function ocultar_elemento(id_object) {
+      var element = document.getElementById(id_object);
+      element.setAttribute("hidden", true);
+    }
+    function borrar_elemento(id_object) {
+      var element = document.getElementById(id_object);
+      element.value = "";
+    }
+    function solicitar_llenado(id_object) {
+      var element = document.getElementById(id_object);
+      element.setAttribute("required", true);
+    }
+    function permitir_vacio(id_object) {
+      var element = document.getElementById(id_object);
+      element.removeAttribute("required");
+    }
+    var selector_conjunto = document.getElementById("referido_conjunto");
+    // Agregar un evento de cambio al selector
+    selector_conjunto.addEventListener("change", function () {
+      // Obtener el valor seleccionado
+      var seleccion = selector_conjunto.value;
+      // Llamar a la función que realiza la acción deseada
+      if (seleccion == "Otro") {
+        mostrar_elemento("otrobarrio");
+        solicitar_llenado("referido_otrobarrio");
+      } else {
+        ocultar_elemento("otrobarrio");
+        borrar_elemento("referido_otrobarrio");
+        permitir_vacio("referido_otrobarrio");
+      }
+    });
+
+    function mostrar_campaña() {
+      var campaña = document.getElementById("info_cliente");
+      if (campaña.hidden == true) {
+        mostrar_elemento("info_cliente");
+      }else{
+        //ocultar_elemento("info_cliente");
+        buscarcliente() 
+      }
+    }
+
+    function tomadatos_referidos(){
+      var toma_referidos = document.getElementById("survey-form");
+      if (toma_referidos.hidden == true) {
+        mostrar_elemento("survey-form");
+      }else{
+        ocultar_elemento("survey-form");
+      }
+    }
+
+    //prueba de busqueda de informacion
+
+    function buscarcliente() {
+      var buscado = document.getElementById("busqueda_titular").value;
+      //console.log(buscado);
+      google.script.run.withSuccessHandler(mostrarResultados).buscar_csv(buscado);
+      busqueda()
+      //console.log("inicio-busqueda")
+    }
+
+    function dato_solicitado(parametro="String",lista_parametros=new Array(),lista_resultados=new Array()){
+      var resultado={}
+      //console.log(parametro)
+      //console.log(lista_parametros)
+      //console.log(lista_resultados)
+      var a=0
+      lista_parametros.forEach(function(parametro_disp){
+        if(parametro_disp==parametro){
+          resultado.resultado=lista_resultados[a]
+        }
+        a=a+1
+      })
+      return resultado
+    }
+
+    function mostrarResultados(data_cliente) {
+      //console.log(data_cliente);
+      // Aquí puedes manipular los datos recibidos y mostrarlos en la página web
+      // Verificar si info_cliente es nulo
+      var dataresultado=data_cliente.info_cliente
+      var dataparametros=data_cliente.encabezados
+      if (data_cliente.info_cliente == null) {
+        //En caso de no encontrar cliente con número de cédula ingresado
+        //console.log("Cliente no encontrado.");
+        busqueda()
+        //console.log("paro-busqueda-no encontre")
+        var mensaje = "La cédula ingresada no se encuentra en el sistema";
+        mostrarAlerta(mensaje)
+      }else{
+        busqueda()
+        //console.log("paro-busqueda-encontre")
+        mostrar_campaña()
+        var nombreusuario = dato_solicitado("NOMBRE",dataparametros,dataresultado).resultado
+        var apellido = dato_solicitado("APELLIDO",dataparametros,dataresultado).resultado
+        var nombrecompleto = nombreusuario+" "+apellido
+        var celular = dato_solicitado("CELULAR",dataparametros,dataresultado).resultado
+        var barrio = dato_solicitado("BARRIO",dataparametros,dataresultado).resultado
+        var direccion = dato_solicitado("DIRECCION",dataparametros,dataresultado).resultado
+        var deuda = dato_solicitado("TOTAL DEUDA",dataparametros,dataresultado).resultado
+        var elemento1 = document.getElementById("nombrecliente_var").textContent = nombrecompleto
+        var elemento2 = document.getElementById("celular_var").textContent = celular
+        var elemento3 = document.getElementById("barrio_var").textContent = barrio
+        var elemento4 = document.getElementById("direccion_var").textContent = direccion
+        var elemento5 = document.getElementById("deuda_var").textContent = "$"+deuda
+        var elemento6 = document.getElementById("msg_campana")
+        if (elemento6.textContent=="{{nombrecompleto}}"){
+          elemento6.textContent = elemento6.textContent.replace("{{nombrecompleto}}", nombrecompleto)
+        }else{
+          elemento6.textContent = elemento6.textContent.replace(elemento6.textContent,nombrecompleto)
+        }
+      }
+    }
+
+    function mostrarAlerta(mensaje=String) {
+    var msg = document.getElementById("mensaje")
+    msg.textContent=msg.textContent.replace("{{mensaje}}",mensaje)
+    var respuesta = document.getElementById("busqueda_titular").value;
+    var alerta = document.getElementById("mialerta");
+    alerta.classList.remove("oculta");
+    //console.log("mostrando")
+    setTimeout(function () {
+      alerta.classList.add("oculta");
+      msg.textContent=msg.textContent.replace(mensaje,"{{mensaje}}")
+      //console.log("ocultando")
+      }, 2000); // Cambia el valor "5000" a la cantidad de milisegundos que desees (5 segundos en este ejemplo)
+    }
+
+    function busqueda() {
+      var visualbusq = document.getElementById("pinbusqueda")
+      if (visualbusq.hidden!=true){
+        visualbusq.setAttribute("hidden", true);
+      }else{
+        visualbusq.removeAttribute("hidden");
+      }
+      var rotacion = document.getElementById("rotacion")
+      if (rotacion.classList.contains("rotating-icon")) {
+        rotacion.classList.remove("rotating-icon");
+      } else {
+        rotacion.classList.add("rotating-icon");
+      }
+    }
+
+    var listareferidos = new Array()
+    var permitir_enviar = Boolean;
+    var mesaje_estado_registrousuario = "-.-"
+
+    function insert_list_referidos(){
+      //console.log("Click en registrar:")
+      //console.log(mesaje_estado_registrousuario)
+      permitir_enviar=true
+      var referido_id = listareferidos.length+1 //En la lista para que aparezca desde 1
+      var referido= new Array()
+      referido.push(referido_id)
+      var informacion_solicitada_id = new Array()
+      informacion_solicitada_id = ["referido_nombrecompleto","referido_celular","referido_direccion","referido_conjunto","referido_otrobarrio","referido_ocupacion","comments"]
+      informacion_solicitada_id.forEach(function(id){
+      var parametro = document.getElementById(id)
+      var dato = parametro.value
+      var oculto = parametro.hidden
+      //console.log("------------------------")
+      referido.push(dato)
+      //console.log(id)
+      //console.log(dato)
+      //console.log(oculto)
+      if(oculto == false){
+        if(id!="comments"&&id!="referido_otrobarrio"){
+          //console.log("Parametro es requerido")
+          if(dato==""){
+            permitir_enviar=false
+          }
+        }else{
+          if(id=="referido_otrobarrio"){
+            if(document.getElementById("otrobarrio").hidden==true){
+              //console.log("Parametro no es requerido")
+            }else{
+              //console.log("Parametro es requerido")
+              if(dato==""){
+                permitir_enviar=false
+              }
+            }
+          }else{
+            //console.log("Parametro no es requerido")
+          }
+        }
+      }
+    })
+    //console.log("Sali del ciclo en estado: "+permitir_enviar+" en permitir enviar")
+    if(permitir_enviar==true){
+      listareferidos.push(referido)
+      //nueva
+      agregarreferidos_lista(referido)
+      //console.log(listareferidos)
+      mesaje_estado_registrousuario="¡Registro exitoso!"     
+    }else{
+      mesaje_estado_registrousuario="¡Algunos campos se encuentran vacios. Por favor ingresar toda la información!"
+    }
+    mostrarAlerta(mesaje_estado_registrousuario)
+    //console.log(mesaje_estado_registrousuario)
+    mesaje_estado_registrousuario=""
+  }
+
+    document.getElementById("survey-form").addEventListener("submit", function(event) {
+      event.preventDefault();  // Evitar el comportamiento predeterminado del formulario
+      // Realizar cualquier acción necesaria antes de enviar los datos
+      // Aquí puedes agregar los datos a un ArrayList u otra estructura de datos
+      // A continuación, puedes hacer cualquier otra cosa que desees hacer después de enviar los datos,
+      // como mostrar un mensaje de éxito o redirigir al usuario a otra página
+      // Por ejemplo, puedes mostrar una alerta con un mensaje de éxito
+      //alert("Los datos se han guardado correctamente.");
+      // O puedes redirigir al usuario a otra página
+      //window.location.href = "url"
+      google.script.run.mostrarpaginaterminacion("Terminación")
+      });
+
+    /*funcion agregar referido a listavisual*/
+    function agregarreferidos_lista(nuevoreferido= Array()) {
+      //var 
+      //nuevoreferido = [1,"juan sebastian Vargas Sánchez","3008616994-3134943988","villa maria"]
+      
+      var tablareferidos = document.getElementById("tablareferidos")
+      // Crear una nueva fila y sus celdas
+      var cell1 = document.createElement('div');
+      var cell2 = document.createElement('div');
+      var cell3 = document.createElement('div');
+      var cell4 = document.createElement('div');
+      var cell5 = document.createElement('div');
+        cell1.className = "col-md-1 text-center";
+        cell2.className = "col-md-4 text-center";
+        cell3.className = "col-md-3 text-center";
+        cell4.className = "col-md-2 text-center";
+        cell5.className = "col-md-2 text-center";
+        /*/Id celdas*/
+        cell1.id="separacion_tablarefe";
+        cell2.id="separacion_tablarefe";
+        cell3.id="separacion_tablarefe";
+        cell4.id="separacion_tablarefe";
+        cell5.id="separacion_tablarefe";
+        /*/Objetos internos*/
+        cell1.innerHTML = `<label>${nuevoreferido[0]}</label>`;
+        cell2.innerHTML = `<label>${nuevoreferido[1]}</label>`;
+        cell3.innerHTML = `<label>${nuevoreferido[2]}</label>`;
+        cell4.innerHTML = `<label>${nuevoreferido[4]}</label>`;
+        cell5.innerHTML = `<button type="button" class="btn btn-outline-success" id="btn_editarreferido">` +
+          `<i class="fi fi-br-edit"></i></button>` +
+          `<button type="button" class="btn btn-outline-primary" id="btn_vercliente">` +
+          `<i class="fi fi-sr-eye"></i></button>` +
+          `<button type="button" class="btn btn-outline-danger" id="btn_vercliente">` +
+          `<i class="fi fi-rs-trash"></i></button>`;
+          /*/ Agregar las celdas a la fila*/
+        tablareferidos.appendChild(cell1);
+        tablareferidos.appendChild(cell2);
+        tablareferidos.appendChild(cell3);
+        tablareferidos.appendChild(cell4);
+        tablareferidos.appendChild(cell5);
+      }
+  </script>
+</body>
+
+</html>
