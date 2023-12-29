@@ -1,0 +1,68 @@
+function extraerInfo_hojacalculo(){
+  var consulta = {}
+  var urlhoja = "https://docs.google.com/spreadsheets/d/1k2ZFGWgoKWwAsuJvTB0IzGaIPwOvTWIAOJaBs20jvi4/edit#gid=0&fvid=2031991099"
+  var nombrehoja = "CLIENTES"
+  var posicion_encabezados=[1,1]
+  var tabladatos = new Array()
+  var tabladatos = SpreadsheetApp.openByUrl(urlhoja).getSheetByName(nombrehoja).getDataRange().getValues()
+  var encabezados = new Array()
+  var clientes= new Array()
+  var a=1
+  tabladatos.forEach(function(dato=Array()){
+    if(a==posicion_encabezados[0]){
+      encabezados=dato
+    }else{
+      clientes.push(dato)
+    }
+  a=a+1
+  })
+  consulta.encabezados=encabezados
+  consulta.clientes=clientes
+  return consulta
+}
+
+function extraerInfo_csv(){
+  var consulta={}
+  var csvurl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQY_iivgQpfJKcdcI_rwdXpn4wmzXN3CHtrlJM8NC-znnnt_U5VMfZGSyV8N0_vyIFWHoqMCRLYDZ7L/pub?gid=703870041&single=true&output=csv"
+  var csv = UrlFetchApp.fetch(csvurl).getContentText();
+  var tabladatos = new Array()
+  var tabladatos = Utilities.parseCsv(csv);
+  var posicion_encabezados=[1]
+  var encabezados = new Array()
+  var clientes= new Array()
+  var a=1
+  tabladatos.forEach(function(dato=Array()){
+    if(a==posicion_encabezados[0]){
+      encabezados=dato
+    }else{
+      clientes.push(dato)
+    }
+  a=a+1
+  })
+  consulta.encabezados=encabezados
+  consulta.clientes=clientes
+  return consulta
+}
+
+function extraerInfo_webservice(){
+  var consulta={}
+  var csvurl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQY_iivgQpfJKcdcI_rwdXpn4wmzXN3CHtrlJM8NC-znnnt_U5VMfZGSyV8N0_vyIFWHoqMCRLYDZ7L/pub?gid=703870041&single=true&output=csv"
+  var csv = UrlFetchApp.fetch(csvurl).getContentText();
+  var tabladatos = new Array()
+  var tabladatos = Utilities.parseCsv(csv);
+  var posicion_encabezados=[1]
+  var encabezados = new Array()
+  var clientes= new Array()
+  var a=1
+  tabladatos.forEach(function(dato=Array()){
+    if(a==posicion_encabezados[0]){
+      encabezados=dato
+    }else{
+      clientes.push(dato)
+    }
+  a=a+1
+  })
+  consulta.encabezados=encabezados
+  consulta.clientes=clientes
+  return consulta
+}
