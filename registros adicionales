@@ -1,0 +1,51 @@
+function generarCodigoAleatorio() {
+  const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const numeros = '0123456789';
+  let codigo = '';
+  // Generar letras aleatorias
+  for (let i = 0; i < 1; i++) {
+    const letraAleatoria = letras.charAt(Math.floor(Math.random() * letras.length));
+    codigo += letraAleatoria;
+  }
+// Generar números aleatorios
+  for (let i = 0; i < 1; i++) {
+    const numeroAleatorio = numeros.charAt(Math.floor(Math.random() * numeros.length));
+    codigo += numeroAleatorio;
+  }
+  for (let i = 0; i < 1; i++) {
+    const letraAleatoria = letras.charAt(Math.floor(Math.random() * letras.length));
+    codigo += letraAleatoria;
+  }
+  for (let i = 0; i < 1; i++) {
+    const numeroAleatorio = numeros.charAt(Math.floor(Math.random() * numeros.length));
+    codigo += numeroAleatorio;
+  }
+  for (let i = 0; i < 1; i++) {
+    const letraAleatoria = letras.charAt(Math.floor(Math.random() * letras.length));
+    codigo += letraAleatoria;
+  }
+  for (let i = 0; i < 1; i++) {
+    const numeroAleatorio = numeros.charAt(Math.floor(Math.random() * numeros.length));
+    codigo += numeroAleatorio;
+  }
+    return codigo;
+}
+
+function pruebacodigo(){
+  const codigoAleatorio = generarCodigoAleatorio();
+  Logger.log(codigoAleatorio);
+}
+
+function fecha_hora() {
+  var fecha = new Date();
+  // Obtiene los componentes de fecha y hora
+  var dia = ('0' + fecha.getDate()).slice(-2);
+  var mes = ('0' + (fecha.getMonth() + 1)).slice(-2);
+  var año = fecha.getFullYear();
+  var horas = ('0' + fecha.getHours()).slice(-2);
+  var minutos = ('0' + fecha.getMinutes()).slice(-2);
+  var segundos = ('0' + fecha.getSeconds()).slice(-2);
+  // Formatea la fecha y la hora
+  var formato = dia + '/' + mes + '/' + año + ' ' + horas + ':' + minutos + ':' + segundos;
+  return formato;
+}
