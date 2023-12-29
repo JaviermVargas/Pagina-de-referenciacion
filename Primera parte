@@ -1,0 +1,7 @@
+function doGet() {
+    return HtmlService.createHtmlOutputFromFile("Formulario.version#7").setTitle("¡Amigored - te conecta facil y rapido con el mundo!")
+}
+
+function mostrarpaginaterminacion(nombre_pagina) {
+    return HtmlService.createHtmlOutputFromFile(nombre_pagina);
+}
