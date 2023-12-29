@@ -1,0 +1,52 @@
+function buscarelement(base=Array(),enc_base=Array(),param_busqueda=String,elemento){
+  var resultado_busqueda = {}
+  var validar = enc_base.includes(param_busqueda)
+  if(validar==true){
+    var columbusqueda = enc_base.indexOf(param_busqueda)
+    var elementos_parametro = new Array()
+    base.forEach(function(info){
+      elementos_parametro.push(info[columbusqueda])
+    })
+    if(elementos_parametro.includes(elemento)==true){
+      base.forEach(function(cliente){
+        if(cliente[columbusqueda]==elemento){
+          resultado_busqueda.resultado=cliente
+        }
+      })
+    }else{
+      Logger.log("¡⚠️ Elemento buscado no encontrado!")
+    }
+  }else{
+    Logger.log("¡⚠️ Parametro de busqueda no existe!")
+  }
+  return resultado_busqueda
+}
+
+////pruebas//////
+function buscar_hojacalculo(elemento=Number){
+  var dato_cliente={}
+  var elementos = extraerInfo_hojacalculo()
+  var info_cliente = buscarelement(elementos.clientes,elementos.encabezados,"IDENTIFICACION",elemento).resultado
+  //Logger.log(info_cliente)
+  dato_cliente.encabezados=elementos.encabezados
+  dato_cliente.info_cliente=info_cliente
+  return dato_cliente
+}
+
+function buscar_csv(elemento=Number){
+  var dato_cliente={}
+  var elementos = extraerInfo_csv()
+  var info_cliente = buscarelement(elementos.clientes,elementos.encabezados,"IDENTIFICACION",elemento.toString()).resultado
+  dato_cliente.encabezados=elementos.encabezados
+  dato_cliente.info_cliente=info_cliente
+  //Logger.log(info_cliente)
+  return dato_cliente
+}
+
+
+function prueba(){
+  var busqcl=buscar_csv(12717346)
+  Logger.log(busqcl.info_cliente)
+  Logger.log(busqcl.encabezados)
+}
+
